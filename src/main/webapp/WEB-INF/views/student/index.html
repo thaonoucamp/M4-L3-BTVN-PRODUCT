@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/student/layout :: head">
+
+<body>
+<div align="center">
+    <h3>Student List</h3>
+<p>
+    <a th:href="@{/students/create}">ADD NEW STUDENT</a>
+</p>
+    <div class="notify">
+        <div th:if="${success}">
+            <span th:text="${success}"></span>
+        </div>
+    </div>
+    <table id="customers" border="1">
+        <tr>
+            <th>Name</th>
+            <th>Date Of Birth</th>
+            <th>Address</th>
+            <th>Telephone</th>
+            <th>Email</th>
+            <th>Class Room</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each="student: ${students}">
+            <td th:text="${student.name}"></td>
+            <td th:text="${student.dateOfBirth}"></td>
+            <td th:text="${student.address}"></td>
+            <td th:text="${student.telephone}"></td>
+            <td th:text="${student.email}"></td>
+            <td th:text="${student.classRoom}"></td>
+            <td>
+                <a th:href="@{/students/${student.id}/edit}">Edit</a>
+            </td>
+            <td>
+                <a th:href="@{/students/${student.id}/delete}">Delete</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<footer th:replace="/student/layout :: footer"></footer>
+
+</body>
+</html>
