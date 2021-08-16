@@ -1,9 +1,11 @@
 package com.codegym.controller;
 
+import com.codegym.model.product.Category;
 import com.codegym.model.product.Product;
 import com.codegym.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,6 +16,9 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private Category categoryService;
 
     @GetMapping("")
     public ModelAndView showAll() {
@@ -44,28 +49,29 @@ public class ProductController {
         return modelAndView;
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     public String update(Product product) {
         productService.update(product.getId(), product);
         return "redirect:/products";
     }
 
-    @GetMapping("/delete?{id}")
+    @GetMapping("/delete/{id}")
     public ModelAndView showFormDelete(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("/product/delete");
         modelAndView.addObject("product", productService.findById(id));
         return modelAndView;
     }
 
-    @DeleteMapping("/delete")
-    public String delete(Product product) {
+    @PostMapping("/delete")
+    public String delete(Product product, Model model) {
         productService.remove(product.getId());
+        model.addAttribute("success", "Da xoa thanh cong 1 product");
         return "redirect:/products";
     }
 
-    @GetMapping("/search/{name}")
-    public ModelAndView findByName(@PathVariable String name) {
-        List<Product> products = productService.findByName("%" + name + "%");
+    @GetMapping("/search")
+    public ModelAndView findByName(@RequestParam("inputSearch") String name) {
+        List<Product> products = productService.findByName(name);
         ModelAndView modelAndView = new ModelAndView("/product/index");
         modelAndView.addObject("products", products);
         return modelAndView;
