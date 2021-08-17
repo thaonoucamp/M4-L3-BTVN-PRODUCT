@@ -24,16 +24,18 @@
     <table id="products">
         <tr>
             <th>NAME</th>
-            <th>PRICE</th>
+            <th>SINGER</th>
             <th>CATEGORY</th>
+            <th>FILE-MUSIC</th>
             <th>EDIT</th>
             <th>DELETE</th>
             <th>VIEW</th>
         </tr>
         <tr th:each="product : ${products}" th:object="${product}">
             <td th:text="*{name}"></td>
-            <td th:text="*{price}"></td>
-            <td th:text="*{categoryId}" align="center"></td>
+            <td th:text="*{singer.getId()}"></td>
+            <td th:text="*{category.getId()}"></td>
+            <td th:text="*{fileMusic}"></td>
             <td>
                 <a th:href="@{/products/edit/{id}(id=${product.id})}">Edit</a>
             </td>

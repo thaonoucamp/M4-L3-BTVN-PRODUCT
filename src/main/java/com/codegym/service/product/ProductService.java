@@ -1,7 +1,9 @@
 package com.codegym.service.product;
 
 import com.codegym.model.Student;
+import com.codegym.model.product.Category;
 import com.codegym.model.product.Product;
+import com.codegym.model.product.Singer;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -15,10 +17,9 @@ public class ProductService implements IProductService {
 
     static {
         products = new ArrayList<>();
-        products.add(new Product(1, "VinFast President", 1000, 1));
-        products.add(new Product(2, "LX 350", 1000, 2));
-        products.add(new Product(3, "Maybach S600", 1000, 3));
-        products.add(new Product(4, "Land Cruiser 2020", 1000, 4));
+        products.add(new Product(1, "Nguoi ra di vi dau", new Singer(1, "Pham Khanh Hung"), new Category(1, "Nhac tre"),"file/music/nhactre/nguoiradividau"));
+        products.add(new Product(2, "Chim trang mo coi", new Singer(2, "Dan truong"), new Category(2, "Nhac tru tinh"),"file/music/nhactrutinh/chimtrangmocoi"));
+        products.add(new Product(3, "Em se la nguoi ra di", new Singer(3, "Cam ly"), new Category(3, "Nhac tru tinh"),"file/music/nhactrutinh/emselanguoiradi"));
     }
 
     @Override

@@ -2,30 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/product/layout :: head"></head>
 <body>
-<h3>Remove product</h3>
-<p>
-  <a th:href="@{/products}">
-    Back to product list
-  </a>
-</p>
-<div id="form">
-  <form action="#" th:action="@{/products/delete}" th:object="${product}"
-        method="POST" novalidate="novalidate">
-    <input type="hidden" th:field="*{id}"/>
-    <div>
-      <label>Name</label>
-      <input type="text" th:field="*{name}"/>
+<div align="center">
+    <h3>Remove product</h3>
+    <p>
+        <a th:href="@{/products}">
+            Back to product list
+        </a>
+    </p>
+    <div id="form">
+        <form action="#" th:action="@{/products/delete}" th:object="${product}" method="POST" novalidate="novalidate">
+            <input type="hidden" th:field="*{id}"/>
+            <div>
+                <label>Name</label>
+                <input th:field="*{name}"/>
+            </div>
+            <div>
+                <label>Singer</label>
+                <input th:field="${singerId.getId()}"></input>
+            </div>
+            <div>
+                <label>Category</label>
+                <input th:field="${categoryId.getId()}"/>
+            </div>
+            <div>
+                <label>File-Music :</label>
+                <input th:field="*{fileMusic}">
+            </div>
+            <span>BAN CO 1 TIENG DE NGHI LAI</span>
+            <br>
+            <input type="submit" value="Yes"/> | <p><a th:href="@{/products}">No</a></p>
+        </form>
     </div>
-    <div>
-      <label>Price</label>
-      <input type="text" th:field="*{price}"/>
-    </div>
-    <div>
-      <label>Category</label>
-      <input type="text" th:field="*{categoryId}"/>
-    </div>
-    <input type="submit" value="Remove"/>
-  </form>
 </div>
 <footer th:replace="/product/layout :: footer"></footer>
 </body>

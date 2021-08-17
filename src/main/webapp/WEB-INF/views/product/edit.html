@@ -3,30 +3,37 @@
 <head th:replace="/product/layout :: head"></head>
 <body>
 <div align="center">
-    <h3>EDIT PRODUCT</h3>
-    <p>
-        <a th:href="@{/products}">COME BACK HOME</a>
-    </p>
+    <div align="center">
+        <h3>EDIT PRODUCT</h3>
+        <p>
+            <a th:href="@{/products}">COME BACK HOME</a>
+        </p>
         <div id="form">
-            <form action="#" method="post" th:action="@{/products/update}" th:object="${product}" novalidate="novalidate">
+            <form action="#" method="post" th:action="@{/products/update}" th:object="${product}"
+                name="product"  novalidate="novalidate" enctype="multipart/form-data">
                 <input type="hidden" th:field="*{id}"/>
                 <div>
                     <label>Name :</label>
                     <input type="text" th:field="*{name}">
                 </div>
                 <div>
-                    <label>Price :</label>
-                    <input type="text" th:field="*{price}">
+                    <label>Singer :</label>
+                    <input name="singer" type="text" th:field="*{singerId}">
                 </div>
                 <div>
                     <label>Category :</label>
-                    <input type="text" th:field="*{categoryId}">
+                    <input name="category" type="text" th:field="*{categoryId}">
+                </div>
+                <div>
+                    <label>File-Music :</label>
+                    <input type="hidden" th:field="*{fileMusic}">
+                    <input type="file" name="fileMusic">
                 </div>
                 <input type="submit" value="Edit">
             </form>
         </div>
+    </div>
 </div>
-
 <footer th:replace="/product/layout :: footer"></footer>
 </body>
 </html>

@@ -6,17 +6,19 @@ import org.springframework.stereotype.Component;
 public class Product {
     private int id;
     private String name;
-    private double price;
-    private int categoryId;
+    private Singer singer;
+    private Category category;
+    private String fileMusic;
 
     public Product() {
     }
 
-    public Product(int id, String name, double price, int categoryId) {
+    public Product(int id, String name, Singer singer, Category category, String fileMusic) {
         this.id = id;
         this.name = name;
-        this.price = price;
-        this.categoryId = categoryId;
+        this.singer = singer;
+        this.category = category;
+        this.fileMusic = fileMusic;
     }
 
     public int getId() {
@@ -35,28 +37,27 @@ public class Product {
         this.name = name;
     }
 
-    public double getPrice() {
-        return price;
+    public Singer getSinger() {
+        return singer;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setSinger(Singer singer) {
+        this.singer = singer;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "name='" + name + '\'' +
-                ", price=" + price +
-                ", categoryId=" + categoryId +
-                '}';
+    public String getFileMusic() {
+        return fileMusic;
+    }
+
+    public void setFileMusic(String fileMusic) {
+        this.fileMusic = fileMusic;
     }
 }
