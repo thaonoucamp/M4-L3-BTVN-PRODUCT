@@ -3,12 +3,11 @@ package com.codegym.controller;
 import com.codegym.model.Customer;
 import com.codegym.service.customer.CustomerService;
 import com.codegym.service.customer.ICustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -16,56 +15,61 @@ import java.util.List;
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
-    private final CustomerService customerService = new CustomerService();
+    @Autowired
+    private CustomerService customerService;
 
     @GetMapping("")
-    public String index(Model model) {
+    public ModelAndView index() {
         List<Customer> customerList = customerService.findAll();
-        model.addAttribute("customers", customerList);
-        return "/customer/index";
+        ModelAndView modelAndView = new ModelAndView("/customer/index");
+        modelAndView.addObject("customers", customerList);
+        return modelAndView;
     }
 
     @GetMapping("/create")
-    public String create(Model model) {
-        model.addAttribute("customer", new Customer());
-        return "/customer/create";
+    public ModelAndView create() {
+        ModelAndView modelAndView = new ModelAndView("/customer/create");
+        modelAndView.addObject("customer", new Customer());
+        return modelAndView;
     }
 
     @PostMapping("/save")
-    public String save(Customer customer) {
-        customer.setId((int) (Math.random() * 10000));
+    public String save(@ModelAttribute Customer customer) {
         customerService.save(customer);
         return "redirect:/customers";
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(@PathVariable int id, Model model) {
-        model.addAttribute("customer", customerService.findById(id));
-        return "/customer/edit";
+    public ModelAndView edit(@PathVariable int id) {
+        ModelAndView modelAndView = new ModelAndView("/customer/edit");
+        modelAndView.addObject("customer", customerService.findById(id));
+        return modelAndView;
     }
 
     @PostMapping("/update")
-    public String update(Customer customer) {
-        customerService.update(customer.getId(), customer);
+    public String update(@RequestParam int id,@ModelAttribute Customer customer) {
+        customerService.update(id, customer);
         return "redirect:/customers";
     }
 
     @GetMapping("/{id}/delete")
-    public String delete(@PathVariable int id, Model model) {
-        model.addAttribute("customer", customerService.findById(id));
-        return "/customer/delete";
+    public ModelAndView delete(@PathVariable int id) {
+        ModelAndView modelAndView = new ModelAndView("/customer/delete");
+        modelAndView.addObject("customer", customerService.findById(id));
+        return modelAndView;
     }
 
     @PostMapping("/delete")
-    public String delete(Customer customer, RedirectAttributes redirect) {
+    public String delete(@RequestParam Customer customer, RedirectAttributes redirect) {
         customerService.remove(customer.getId());
         redirect.addFlashAttribute("success", "Removed customer successfully!");
         return "redirect:/customers";
     }
 
     @GetMapping("/{id}/view")
-    public String view(@PathVariable int id, Model model) {
-        model.addAttribute("customer", customerService.findById(id));
-        return "/customer/view";
+    public ModelAndView view(@PathVariable int id) {
+        ModelAndView modelAndView = new ModelAndView("/customer/view");
+        modelAndView.addObject("customer", customerService.findById(id));
+        return modelAndView;
     }
 }

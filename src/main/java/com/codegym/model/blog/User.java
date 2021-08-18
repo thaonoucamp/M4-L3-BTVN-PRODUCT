@@ -1,21 +1,19 @@
-package com.codegym.model.product;
-
-import org.springframework.stereotype.Component;
+package com.codegym.model.blog;
 
 import javax.persistence.*;
 
 @Entity
 @Table
-public class Singer {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
 
-    public Singer() {
+    public User() {
     }
 
-    public Singer(int id, String name) {
+    public User(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -36,4 +34,3 @@ public class Singer {
         this.name = name;
     }
 }
-

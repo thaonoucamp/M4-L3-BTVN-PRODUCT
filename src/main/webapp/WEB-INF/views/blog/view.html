@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/blog/layout :: head">
+</head>
+<body>
+<div align="center">
+    <h3>VIEW PRODUCT</h3>
+    <h4>
+        <a th:href="@{/blogs}">COME BACK HOME</a>
+    </h4>
+    <div id="detail">
+        <div class="cusdetail">
+            <label>Tittle :</label>
+            <label th:text="${blog.tittle}"></label>
+            <br>
+            <label>Content :</label>
+            <label th:text="${blog.content}"></label>
+            <br>
+            <label>Time :</label>
+            <label th:datetime="${blog.date}"></label>
+            <br>
+            <label>Content :</label>
+            <label th:if="${blog.status == true}">Public</label>
+            <label th:if="${blog.status == false}">Private</label>
+            <br>
+            <label>Comment :</label>
+            <label th:text="${blog.commentId.getContent()}"></label>
+            <br>
+            <label>Like :</label>
+            <label th:text="${blog.likeId.getQuantityLike()}"></label>
+            <br>
+            <label>File-Path :</label>
+            <label th:text="${blog.likeId.status}"></label>
+        </div>
+    </div>
+</div>
+<footer th:replace="/blog/layout :: footer">
+</footer>
+</body>
+</html>

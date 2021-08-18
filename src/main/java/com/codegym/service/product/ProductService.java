@@ -1,35 +1,29 @@
 package com.codegym.service.product;
 
-import com.codegym.model.Student;
-import com.codegym.model.product.Category;
 import com.codegym.model.product.Product;
-import com.codegym.model.product.Singer;
+import com.codegym.repository.product.IRepoProduct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ProductService implements IProductService {
-    static List<Product> products;
+    @Autowired
+    IRepoProduct repoProduct;
 
-    static {
-        products = new ArrayList<>();
-        products.add(new Product(1, "Nguoi ra di vi dau", new Singer(1, "Pham Khanh Hung"), new Category(1, "Nhac tre"),"file/music/nhactre/nguoiradividau"));
-        products.add(new Product(2, "Chim trang mo coi", new Singer(2, "Dan truong"), new Category(2, "Nhac tru tinh"),"file/music/nhactrutinh/chimtrangmocoi"));
-        products.add(new Product(3, "Em se la nguoi ra di", new Singer(3, "Cam ly"), new Category(3, "Nhac tru tinh"),"file/music/nhactrutinh/emselanguoiradi"));
-    }
+    List<Product> products = new ArrayList<>();
 
     @Override
     public List<Product> findAll() {
+        products = repoProduct.findAll();
         return products;
     }
 
     @Override
     public void save(Product product) {
-        products.add(product);
+       repoProduct.save(product);
     }
 
     public Product findById(int id) {
@@ -43,13 +37,12 @@ public class ProductService implements IProductService {
 
     @Override
     public void update(int id, Product product) {
-        product.setId(id);
-        products.add(product);
+      repoProduct.update(id, product);
     }
 
     @Override
     public void remove(int id) {
-        products.remove(findById(id));
+        repoProduct.remove(id);
     }
 
 

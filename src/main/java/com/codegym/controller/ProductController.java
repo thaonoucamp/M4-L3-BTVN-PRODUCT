@@ -3,6 +3,7 @@ package com.codegym.controller;
 import com.codegym.model.product.Category;
 import com.codegym.model.product.Product;
 import com.codegym.model.product.Singer;
+import com.codegym.service.product.IProductService;
 import com.codegym.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,9 +23,6 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService productService;
-
-    @Autowired
-    private Category categoryService;
 
     @GetMapping("")
     public ModelAndView showAll() {

@@ -1,20 +1,14 @@
 package com.codegym.service.category;
 
 import com.codegym.model.product.Category;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class CategoryService implements ICategory {
-    static private List<Category> categories;
-
-    static {
-        categories = new ArrayList<>();
-        categories.add(new Category(1, "VinFast"));
-        categories.add(new Category(2, "Lexus"));
-        categories.add(new Category(3, "Mercedes"));
-        categories.add(new Category(4, "Toyota"));
-    }
+    private List<Category> categories;
 
     public String findById(int id) {
         String name = "";

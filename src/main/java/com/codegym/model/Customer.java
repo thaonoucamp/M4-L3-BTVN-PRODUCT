@@ -1,6 +1,12 @@
 package com.codegym.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table
 public class Customer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String email;

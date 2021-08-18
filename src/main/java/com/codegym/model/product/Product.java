@@ -2,12 +2,21 @@ package com.codegym.model.product;
 
 import org.springframework.stereotype.Component;
 
-@Component
+import javax.persistence.*;
+
+@Entity
+@Table
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+
+    @ManyToOne
     private Singer singer;
+    @ManyToOne
     private Category category;
+
     private String fileMusic;
 
     public Product() {
