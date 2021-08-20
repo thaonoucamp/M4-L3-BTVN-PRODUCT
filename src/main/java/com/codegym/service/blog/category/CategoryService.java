@@ -1,9 +1,8 @@
-package com.codegym.service.category;
+package com.codegym.service.blog.category;
 
 import com.codegym.model.product.Category;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

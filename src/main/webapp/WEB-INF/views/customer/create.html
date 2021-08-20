@@ -22,8 +22,10 @@
                 <input type="email" th:field="*{email}"/>
             </div>
             <div>
-                <label>Address</label>
-                <input type="text" th:field="*{address}"/>
+                <label>Province</label>
+                <select th:field="*{province}">
+                    <option th:each="p : ${provinces}" th:value="p.id" th:name="p.name"></option>
+                </select>
             </div>
             <input type="submit" value="Save"/>
         </form>

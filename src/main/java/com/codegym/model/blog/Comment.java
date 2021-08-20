@@ -15,9 +15,10 @@ public class Comment {
     @ManyToOne
     private Like likeId;
 
-    private long date = System.currentTimeMillis();
+    @Column(columnDefinition = "TEXT")
     private String content;
     private int countComment = 0;
+    private long date = System.currentTimeMillis();
 
     public Comment() {
     }

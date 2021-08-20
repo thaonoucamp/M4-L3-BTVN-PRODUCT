@@ -1,17 +1,13 @@
 package com.codegym.service.customer;
 
-import com.codegym.model.Customer;
+import com.codegym.model.customer.Customer;
+import com.codegym.model.customer.Province;
+import com.codegym.service.IGeneralService;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-public interface ICustomerService {
-    List<Customer> findAll();
+public interface ICustomerService extends IGeneralService<Customer> {
+    Page<Customer> findAll(Page page);
 
-    void save(Customer customer);
-
-    Customer findById(int id);
-
-    void update(int id, Customer customer);
-
-    void remove(int id);
 }

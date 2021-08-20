@@ -1,6 +1,5 @@
 package com.codegym.repository.blog;
 
-import com.codegym.model.Customer;
 import com.codegym.model.blog.Blog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

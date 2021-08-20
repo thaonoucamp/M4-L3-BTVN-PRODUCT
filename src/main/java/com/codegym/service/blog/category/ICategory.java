@@ -1,6 +1,5 @@
-package com.codegym.service.category;
+package com.codegym.service.blog.category;
 
-import com.codegym.GeneralCRUD;
 import com.codegym.model.product.Category;
 
 public interface ICategory extends GeneralCRUD<Category> {

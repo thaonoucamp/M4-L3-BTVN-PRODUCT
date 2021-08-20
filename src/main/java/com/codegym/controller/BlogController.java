@@ -1,6 +1,5 @@
 package com.codegym.controller;
 
-import com.codegym.model.Customer;
 import com.codegym.model.blog.Blog;
 import com.codegym.service.blog.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;

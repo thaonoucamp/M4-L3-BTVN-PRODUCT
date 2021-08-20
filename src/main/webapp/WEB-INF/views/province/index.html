@@ -27,13 +27,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="cus,rowStat : ${customers}">
-            <td th:text="${cus.getName()}"></td>
-            <td th:text="${cus.getEmail()}"></td>
-            <td th:text="${cus.getProvince().getName()}"></td>
-            <td><a th:href="@{/customers/__${cus.id}__/edit}">edit</a></td>
-            <td><a th:href="@{/customers/__${cus.id}__/delete}">delete</a></td>
-            <td><a th:href="@{/customers/__${cus.id}__/view}">view</a></td>
+        <tr th:each="row,rowStat : ${customers}">
+            <td th:text="${row.getName()}"></td>
+            <td th:text="${row.getEmail()}"></td>
+            <td th:text="${row.getAddress()}"></td>
+            <td><a th:href="@{/customers/{id}/edit(id=${row.getId()})}">edit</a></td>
+            <td><a th:href="@{/customers/{id}/delete(id=${row.getId()})}">delete</a></td>
+            <td><a th:href="@{/customers/{id}/view(id=${row.getId()})}">view</a></td>
         </tr>
         </tbody>
     </table>

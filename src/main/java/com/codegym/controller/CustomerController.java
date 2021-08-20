@@ -1,11 +1,10 @@
 package com.codegym.controller;
 
-import com.codegym.model.Customer;
+import com.codegym.model.customer.Customer;
 import com.codegym.service.customer.CustomerService;
-import com.codegym.service.customer.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -19,10 +18,9 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping("")
-    public ModelAndView index() {
-        List<Customer> customerList = customerService.findAll();
+    public ModelAndView index(Page page) {
         ModelAndView modelAndView = new ModelAndView("/customer/index");
-        modelAndView.addObject("customers", customerList);
+        modelAndView.addObject("customers", customerService.findAll(page));
         return modelAndView;
     }
 
@@ -40,34 +38,34 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}/edit")
-    public ModelAndView edit(@PathVariable int id) {
+    public ModelAndView edit(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("/customer/edit");
         modelAndView.addObject("customer", customerService.findById(id));
         return modelAndView;
     }
 
     @PostMapping("/update")
-    public String update(@RequestParam int id,@ModelAttribute Customer customer) {
-        customerService.update(id, customer);
+    public String update(@RequestParam Long id,@ModelAttribute Customer customer) {
+        customerService.save(customer);
         return "redirect:/customers";
     }
 
     @GetMapping("/{id}/delete")
-    public ModelAndView delete(@PathVariable int id) {
+    public ModelAndView delete(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("/customer/delete");
         modelAndView.addObject("customer", customerService.findById(id));
         return modelAndView;
     }
 
     @PostMapping("/delete")
-    public String delete(@RequestParam Customer customer, RedirectAttributes redirect) {
-        customerService.remove(customer.getId());
+    public String delete(@RequestParam Long id, RedirectAttributes redirect) {
+        customerService.remove(id);
         redirect.addFlashAttribute("success", "Removed customer successfully!");
         return "redirect:/customers";
     }
 
     @GetMapping("/{id}/view")
-    public ModelAndView view(@PathVariable int id) {
+    public ModelAndView view(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("/customer/view");
         modelAndView.addObject("customer", customerService.findById(id));
         return modelAndView;
